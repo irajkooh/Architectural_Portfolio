@@ -90,7 +90,7 @@ export default function ResumeTab() {
         {resume?.file ? (
           <div>
             <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", overflow: "hidden", aspectRatio: "3/2", marginBottom: "0.75rem" }}>
-              <iframe src={`${resume.file}#view=FitH`} style={{ width: "100%", height: "100%", border: "none" }} title="Resume" />
+              <iframe src="/api/resume/preview" style={{ width: "100%", height: "100%", border: "none" }} title="Resume" />
             </div>
             <div style={{ display: "flex", gap: "0.75rem" }}>
               <a href={resume.file} target="_blank" rel="noreferrer" className="btn btn-outline" style={{ fontSize: "0.85rem", padding: "0.5rem 1rem" }}>
