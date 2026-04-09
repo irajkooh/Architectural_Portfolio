@@ -1,0 +1,16 @@
+_Files/
+backend/venv/
+backend/__pycache__/
+backend/uploads/chroma/
+backend/uploads/smtp.json
+backend/uploads/backgrounds/*.m4v
+backend/uploads/projects/**/*.m4v
+backend/uploads/projects/**/*.mp4
+backend/uploads/showcase_music/
+frontend/
+showcase_images/
+*.log
+.DS_Store
+.env
+.HF_TOKEN.txt
+.GROQ_API_KEY.txt

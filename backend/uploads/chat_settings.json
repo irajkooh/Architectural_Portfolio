@@ -1,0 +1,15 @@
+{
+  "ollama_host": "http://localhost:11434",
+  "chat_model": "llama3.2",
+  "embed_model": "nomic-embed-text",
+  "sample_questions": [
+    "How you can help me?",
+    "Summarize Tella's resume in max 10 bullet points.",
+    "What is her degrees and certificates?",
+    "Tell me about her key achievements.",
+    "What other certificates or courses you suggest for her and why?",
+    "What positions are the best fit for her to apply?",
+    "Is she a good fit for a Lead AI Architect position?",
+    "Any suggestion you may have for employers?"
+  ]
+}

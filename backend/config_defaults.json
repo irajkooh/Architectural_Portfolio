@@ -1,0 +1,73 @@
+{
+  "theme": {
+    "background": "#111111",
+    "foreground": "#F5F0EB",
+    "accent": "#C9A84C",
+    "secondary": "#8B6F47",
+    "headerFont": "Playfair Display",
+    "bodyFont": "Inter",
+    "backgroundImage": null,
+    "backgroundImageOpacity": 0.15
+  },
+  "hero": {
+    "title": "Tella Irani Shemirani",
+    "subtitle": "Architect",
+    "tagline": "Designing spaces that inspire, endure, and connect.",
+    "backgroundVideo": null,
+    "backgroundImage": null,
+    "showVideo": false,
+    "backgroundImageOpacity": 0.2,
+    "backgroundVideoOpacity": 0.25,
+    "ctaPortfolio": "View Portfolio",
+    "ctaResume": "Download Resume"
+  },
+  "about": {
+    "bio": "Tella Irani Shemirani is a passionate architect dedicated to creating spaces that harmonize form, function, and human experience. With a keen eye for detail and a deep appreciation for cultural context, her work spans residential, commercial, and public architecture.",
+    "philosophy": "Architecture is not just about buildings — it is about the lives lived within them. Every design decision is an opportunity to shape how people feel, move, and connect.",
+    "linkedin": "https://linkedin.com/in/tella-irani-shemirani",
+    "photo": null,
+    "education": [
+      {"year": "2020", "degree": "Master of Architecture", "institution": "Carleton University"},
+      {"year": "2018", "degree": "Bachelor of Architectural Studies", "institution": "Carleton University"}
+    ],
+    "skills": ["Architectural Design", "AutoCAD", "Revit", "SketchUp", "3ds Max", "Sustainable Design", "Urban Planning"],
+    "honors": [
+      {
+        "year": "2017",
+        "title": "John Adjaeleian Scholarship",
+        "description": "Awarded for the research, manufacturing, and prototyping of a robot representing an intelligent building skin — contributing to the understanding of building structures at the level of the building envelope.",
+        "url": "https://carleton.ca/cee/2017/award-winners-honoured-ja-lecture/"
+      }
+    ],
+    "publications": [
+      {
+        "year": "2017",
+        "title": "Interactive Facade",
+        "venue": "Master's Thesis, Carleton University",
+        "url": "https://www.researchgate.net/publication/325477172_INTERACTIVE_FACADE"
+      }
+    ]
+  },
+  "projectTypes": ["Residential", "Commercial", "Urban", "Concept", "Hospitality", "Transportation", "Education", "Other"],
+  "projects": [],
+  "resume": {
+    "file": null,
+    "visible": true,
+    "highlights": ["Architectural Design", "Sustainable Building", "Urban Development", "Client Consultation"]
+  },
+  "contact": {
+    "email": "tellairshemirani@gmail.com",
+    "linkedin": "https://linkedin.com/in/tella-irani-shemirani",
+    "message": "Let's create something extraordinary together. Reach out to discuss your project or collaboration."
+  },
+  "showcase": {
+    "title": "Showcase",
+    "subtitle": "A visual journey through selected architectural works.",
+    "videoOpacity": 1.0,
+    "videos": []
+  },
+  "portfolio": {
+    "file": null,
+    "visible": true
+  }
+}

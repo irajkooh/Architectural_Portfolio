@@ -1,0 +1,24 @@
+node_modules/
+frontend/node_modules/
+frontend/dist/
+backend/venv/
+backend/__pycache__/
+backend/uploads/chroma/
+backend/uploads/smtp.json
+backend/uploads/config.json
+backend/uploads/showcase_images/_clip*.mp4
+backend/uploads/showcase_images/_video.mp4
+backend/uploads/backgrounds/*.m4v
+backend/uploads/showcase_music/
+backend/uploads/projects/showcase/
+# backend/static/ is committed (pre-built frontend for fast HF deploys)
+__pycache__/
+*.pyc
+.env
+.DS_Store
+*.log
+frontend/backend/
+frontend/node_modules/
+.GROQ_API_KEY.txt
+.HF_TOKEN.txt
+_Files/
