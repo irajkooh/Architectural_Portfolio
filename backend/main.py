@@ -87,7 +87,7 @@ CHAT_MODEL   = os.environ.get("CHAT_MODEL",   "llama3.2")
 EMBED_MODEL  = os.environ.get("EMBED_MODEL",  "nomic-embed-text")
 
 # Ensure dirs exist
-for d in ["profile", "resume", "backgrounds", "projects", "showcase_images", "showcase_music"]:
+for d in ["profile", "resume", "backgrounds", "projects", "showcase_images", "showcase_music", "portfolio"]:
     (DATA_DIR / d).mkdir(parents=True, exist_ok=True)
 
 SHOWCASE_IMAGES_DIR = DATA_DIR / "showcase_images"
@@ -423,6 +423,19 @@ def _normalize_projects(projects: list) -> list:
     return projects
 
 
+def _sync_file_paths(cfg: dict) -> None:
+    """Ensure portfolio/resume file fields match what is actually on disk.
+    Prevents config drift where file=null but the PDF was successfully uploaded.
+    Called on every load_config() so any subsequent save_config() persists the
+    correct path — matching how resume.pdf (always in the Docker image) works."""
+    if (DATA_DIR / "portfolio" / "portfolio.pdf").exists():
+        if not (cfg.get("portfolio") or {}).get("file"):
+            cfg.setdefault("portfolio", {})["file"] = "/uploads/portfolio/portfolio.pdf"
+    if (DATA_DIR / "resume" / "resume.pdf").exists():
+        if not (cfg.get("resume") or {}).get("file"):
+            cfg.setdefault("resume", {})["file"] = "/uploads/resume/resume.pdf"
+
+
 def load_config() -> dict:
     with open(DEFAULTS_FILE) as f:
         defaults = json.load(f)
@@ -435,6 +448,7 @@ def load_config() -> dict:
         if not merged.get("projects") and defaults.get("projects"):
             merged["projects"] = defaults["projects"]
         merged["projects"] = _normalize_projects(merged.get("projects", []))
+        _sync_file_paths(merged)  # recover file paths nulled by HF config drift
         return merged
 
     # Priority 2: info.xlsx — portable deployment snapshot
@@ -442,6 +456,7 @@ def load_config() -> dict:
         try:
             config = load_from_excel()
             config["projects"] = _normalize_projects(config.get("projects", []))
+            _sync_file_paths(config)  # recover file paths nulled by HF config drift
             # Persist to config.json so subsequent requests are fast
             with open(CONFIG_FILE, "w") as f:
                 json.dump(config, f, indent=2)
@@ -600,6 +615,29 @@ async def lifespan(app):
                 print("[migrate] Recovered project fields from deployment config into HF-pulled config")
         except Exception as _e:
             print(f"[migrate] Field migration failed: {_e}")
+
+    # Startup file-path recovery: if PDFs exist on disk (either from Docker image or HF pull)
+    # but config.json has their paths as null, restore them.  This is the permanent fix for
+    # the portfolio download button disappearing on Space after any config save.
+    if CONFIG_FILE.exists():
+        try:
+            with open(CONFIG_FILE) as _f:
+                _live_fp = json.load(_f)
+            _fp_changed = False
+            if (DATA_DIR / "portfolio" / "portfolio.pdf").exists():
+                if not (_live_fp.get("portfolio") or {}).get("file"):
+                    _live_fp.setdefault("portfolio", {})["file"] = "/uploads/portfolio/portfolio.pdf"
+                    _fp_changed = True
+            if (DATA_DIR / "resume" / "resume.pdf").exists():
+                if not (_live_fp.get("resume") or {}).get("file"):
+                    _live_fp.setdefault("resume", {})["file"] = "/uploads/resume/resume.pdf"
+                    _fp_changed = True
+            if _fp_changed:
+                with open(CONFIG_FILE, "w") as _f:
+                    json.dump(_live_fp, _f, indent=2)
+                print("[migrate] Restored PDF file paths in config.json from disk")
+        except Exception as _e:
+            print(f"[migrate] File-path recovery failed: {_e}")
 
     _bootstrap_smtp()
     # Only sync Excel if we actually have config data; prevents overwriting with empty on pull failure
@@ -943,6 +981,21 @@ async def resume_preview():
         },
     )
 
+@app.get("/api/portfolio/preview")
+async def portfolio_preview():
+    pdf_path = DATA_DIR / "portfolio" / "portfolio.pdf"
+    if not pdf_path.exists():
+        raise HTTPException(404, "Portfolio not found")
+    return FileResponse(
+        str(pdf_path),
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": "inline; filename=portfolio.pdf",
+            "X-Frame-Options": "ALLOWALL",
+            "Content-Security-Policy": "frame-ancestors *",
+        },
+    )
+
 @app.post("/api/admin/resume/file")
 async def upload_resume(file: UploadFile = File(...), _: str = Depends(verify_admin)):
     dest = DATA_DIR / "resume" / "resume.pdf"
@@ -951,6 +1004,7 @@ async def upload_resume(file: UploadFile = File(...), _: str = Depends(verify_ad
     cfg = load_config()
     cfg["resume"]["file"] = "/uploads/resume/resume.pdf"
     save_config(cfg)
+    threading.Thread(target=_hf_push_file, args=(dest,), daemon=True).start()
     ingested = 0
     if CHAT_DEPS:
         try:
