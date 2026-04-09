@@ -53,7 +53,7 @@ export default function PortfolioTab() {
         {portfolio?.file ? (
           <div>
             <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", overflow: "hidden", aspectRatio: "3/2", marginBottom: "0.75rem" }}>
-              <iframe src={`${portfolio.file}#view=FitH`} style={{ width: "100%", height: "100%", border: "none" }} title="Portfolio" />
+              <iframe src="/api/portfolio/preview" style={{ width: "100%", height: "100%", border: "none" }} title="Portfolio" />
             </div>
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <a href={portfolio.file} target="_blank" rel="noreferrer" className="btn btn-outline" style={{ fontSize: "0.85rem", padding: "0.5rem 1rem" }}>
