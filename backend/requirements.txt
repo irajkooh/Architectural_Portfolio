@@ -5,8 +5,7 @@ aiofiles==25.1.0
 python-jose==3.5.0
 passlib==1.7.4
 bcrypt==5.0.0
-# chromadb and ollama are optional (local dev only) — omitted to keep HF builds fast
-# re-add if running locally with Ollama: chromadb==1.5.5 ollama==0.6.1
+ollama==0.6.1
 pypdf==6.9.1
 pdfplumber==0.11.9
 groq==1.1.1
