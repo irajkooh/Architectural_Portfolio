@@ -1119,10 +1119,10 @@ def _detect_location() -> str:
 @app.get("/api/chat/info")
 def chat_info():
     s = load_chat_settings()
-    if os.environ.get("GROQ_API_KEY"):
-        model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant") + " (Groq)"
-    elif OLLAMA_DEPS:
+    if OLLAMA_DEPS:
         model = os.environ.get("CHAT_MODEL") or s.get("chat_model", "llama3.2:1b")
+    elif os.environ.get("GROQ_API_KEY"):
+        model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant") + " (Groq)"
     elif os.environ.get("HF_TOKEN"):
         model = os.environ.get("HF_MODEL", "meta-llama/Llama-3.1-8B-Instruct") + " (HuggingFace)"
     else:
@@ -1139,7 +1139,13 @@ def _check_chat_deps():
 
 
 def _llm_chat(messages: list) -> str:
-    """Send chat messages to LLM. Priority: Groq → Ollama → HuggingFace."""
+    """Send chat messages to LLM. Priority: Ollama → Groq → HuggingFace."""
+    if OLLAMA_DEPS:
+        ollama_host, chat_model, _ = _chat_cfg()
+        client = ollama_lib.Client(host=ollama_host)
+        response = client.chat(model=chat_model, messages=messages)
+        msg = response.message if hasattr(response, "message") else response["message"]
+        return (msg.content if hasattr(msg, "content") else msg["content"]).strip()
     groq_key = os.environ.get("GROQ_API_KEY")
     if groq_key:
         if not GROQ_AVAILABLE:
@@ -1148,12 +1154,6 @@ def _llm_chat(messages: list) -> str:
         client = groq_lib.Groq(api_key=groq_key)
         resp = client.chat.completions.create(model=groq_model, messages=messages)
         return resp.choices[0].message.content.strip()
-    if OLLAMA_DEPS:
-        ollama_host, chat_model, _ = _chat_cfg()
-        client = ollama_lib.Client(host=ollama_host)
-        response = client.chat(model=chat_model, messages=messages)
-        msg = response.message if hasattr(response, "message") else response["message"]
-        return (msg.content if hasattr(msg, "content") else msg["content"]).strip()
     hf_token = os.environ.get("HF_TOKEN")
     if hf_token and HF_AVAILABLE:
         hf_model = os.environ.get("HF_MODEL", "meta-llama/Llama-3.1-8B-Instruct")
