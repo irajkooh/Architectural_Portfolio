@@ -1,7 +1,12 @@
+FROM ollama/ollama:latest AS ollama_src
+
 FROM python:3.12-slim
 
-RUN apt-get update && apt-get install -y ffmpeg && \
+RUN apt-get update && apt-get install -y ffmpeg curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy Ollama binary from official image (avoids unreliable network download during build)
+COPY --from=ollama_src /usr/bin/ollama /usr/bin/ollama
 
 WORKDIR /app
 
@@ -9,13 +14,20 @@ WORKDIR /app
 COPY backend/requirements.txt ./backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
-# ── Backend source + pre-built frontend + uploads (config/photos/resume) ──────
+# ── Backend source + pre-built frontend + uploads ─────────────────────────────
 COPY backend/ ./backend/
 
-# ── Static media (portfolio PDF, etc.) ─────────────────────────────────
+# ── Static media ──────────────────────────────────────────────────────────────
 COPY media/ ./media/
 
-# ── Permissions (HF Spaces runs as non-root uid 1000) ────────────────────────
+# ── Startup script ────────────────────────────────────────────────────────────
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+ENV OLLAMA_MODELS=/app/.ollama/models
+RUN mkdir -p /app/.ollama/models
+
+# ── Permissions (HF Spaces runs as non-root uid 1000) ─────────────────────────
 RUN useradd -m -u 1000 appuser && \
     chown -R appuser:appuser /app && \
     chmod -R 755 /app/backend/uploads
@@ -25,5 +37,8 @@ EXPOSE 7860
 
 ENV ADMIN_PASSWORD=TAA1346
 ENV DATA_DIR=/app/backend/uploads
+ENV OLLAMA_HOST=http://localhost:11434
+ENV OLLAMA_MODELS=/app/.ollama/models
+ENV CHAT_MODEL=llama3.2:3b
 
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["/app/start.sh"]
