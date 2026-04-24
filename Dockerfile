@@ -20,10 +20,9 @@ RUN chmod +x /app/start.sh
 ENV OLLAMA_MODELS=/app/.ollama/models
 RUN mkdir -p /app/.ollama/models
 
-RUN useradd -m -u 1000 appuser && \
-    chown -R appuser:appuser /app && \
+RUN chown -R 1000:1000 /app && \
     chmod -R 755 /app/backend/uploads
-USER appuser
+USER 1000
 
 EXPOSE 7860
 
