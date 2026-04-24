@@ -1157,7 +1157,7 @@ def _llm_chat(messages: list) -> str:
     hf_token = os.environ.get("HF_TOKEN")
     if hf_token and HF_AVAILABLE:
         hf_model = os.environ.get("HF_MODEL", "meta-llama/Llama-3.1-8B-Instruct")
-        client = _HFInferenceClient(model=hf_model, token=hf_token)
+        client = _HFInferenceClient(model=hf_model, token=hf_token, provider="hf-inference")
         resp = client.chat_completion(messages=messages, max_tokens=1024)
         return resp.choices[0].message.content.strip()
     raise RuntimeError("No LLM available. Install ollama or set GROQ_API_KEY.")
