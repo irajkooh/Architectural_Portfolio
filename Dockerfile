@@ -39,6 +39,6 @@ ENV ADMIN_PASSWORD=TAA1346
 ENV DATA_DIR=/app/backend/uploads
 ENV OLLAMA_HOST=http://localhost:11434
 ENV OLLAMA_MODELS=/app/.ollama/models
-ENV CHAT_MODEL=llama3.1:8b
+ENV CHAT_MODEL=llama3.2:3b
 
 CMD ["/app/start.sh"]
