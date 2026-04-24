@@ -24,11 +24,16 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import secrets
 import aiofiles
 try:
-    import chromadb
     import ollama as ollama_lib
     OLLAMA_DEPS = True
 except ImportError:
     OLLAMA_DEPS = False
+
+try:
+    import chromadb  # noqa: F401
+    CHROMA_AVAILABLE = True
+except ImportError:
+    CHROMA_AVAILABLE = False
 
 try:
     import groq as groq_lib
@@ -1264,8 +1269,8 @@ def ingest_resume_to_chroma() -> int:
     # Always save full text — chat uses this directly
     (DATA_DIR / "resume").mkdir(exist_ok=True)
     (DATA_DIR / "resume" / "resume_text.txt").write_text(full_text, encoding="utf-8")
-    # ChromaDB vector store — optional, only when Ollama is available
-    if OLLAMA_DEPS:
+    # ChromaDB vector store — optional, only when both Ollama and chromadb are available
+    if OLLAMA_DEPS and CHROMA_AVAILABLE:
         try:
             chunks = _split_text(full_text)
             embeddings = _embed(chunks)
@@ -1297,6 +1302,8 @@ def get_sample_questions():
 def chat_status(_: str = Depends(verify_admin)):
     if not CHAT_DEPS:
         return {"installed": False, "chunks": 0}
+    if not CHROMA_AVAILABLE:
+        return {"installed": True, "chunks": 0}
     try:
         count = _chroma_collection().count()
         return {"installed": True, "chunks": count}
