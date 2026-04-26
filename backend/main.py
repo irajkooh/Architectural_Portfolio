@@ -80,7 +80,7 @@ def load_chat_settings() -> dict:
         return data
     return {
         "ollama_host":      os.environ.get("OLLAMA_HOST", "http://localhost:11434"),
-        "chat_model":       os.environ.get("CHAT_MODEL",  "llama3.2:3b"),
+        "chat_model":       os.environ.get("CHAT_MODEL",  "llama3"),
         "embed_model":      os.environ.get("EMBED_MODEL", "nomic-embed-text"),
         "sample_questions": [],
     }
@@ -98,7 +98,7 @@ def _chat_cfg():
     )
 
 OLLAMA_HOST  = os.environ.get("OLLAMA_HOST",  "http://localhost:11434")
-CHAT_MODEL   = os.environ.get("CHAT_MODEL",   "llama3.2:3b")
+CHAT_MODEL   = os.environ.get("CHAT_MODEL",   "llama3")
 EMBED_MODEL  = os.environ.get("EMBED_MODEL",  "nomic-embed-text")
 
 # Ensure dirs exist
@@ -1128,11 +1128,11 @@ def chat_info():
     s = load_chat_settings()
     provider = os.environ.get("LLM_PROVIDER", "auto").lower()
     if provider == "auto" and os.environ.get("GROQ_API_KEY"):
-        model = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile") + " (Groq)"
+        model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant") + " (Groq)"
     elif provider == "auto" and os.environ.get("HF_TOKEN"):
         model = os.environ.get("HF_MODEL", "meta-llama/Llama-3.2-3B-Instruct") + " (HuggingFace)"
     else:
-        model = os.environ.get("CHAT_MODEL") or s.get("chat_model", "llama3.2:3b")
+        model = os.environ.get("CHAT_MODEL") or s.get("chat_model", "llama3")
     return {
         "device":   _detect_device(),
         "model":    model,
@@ -1152,7 +1152,7 @@ def _llm_chat(messages: list) -> str:
         if groq_key:
             if not GROQ_AVAILABLE:
                 raise RuntimeError("groq package not installed")
-            groq_model = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+            groq_model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
             client = groq_lib.Groq(api_key=groq_key)
             resp = client.chat.completions.create(model=groq_model, messages=messages)
             return resp.choices[0].message.content.strip()
