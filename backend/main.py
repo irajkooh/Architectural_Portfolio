@@ -41,19 +41,8 @@ try:
 except Exception:
     GROQ_AVAILABLE = False
 
-try:
-    from huggingface_hub import InferenceClient as _HFInferenceClient
-    HF_AVAILABLE = True
-except Exception:
-    HF_AVAILABLE = False
-
-# Chat is available if Groq API key is set, HF_TOKEN is set, or Ollama is installed
 def _has_llm() -> bool:
-    if os.environ.get("LLM_PROVIDER", "auto").lower() == "ollama":
-        return OLLAMA_DEPS
-    return (bool(os.environ.get("GROQ_API_KEY"))
-            or bool(os.environ.get("HF_TOKEN"))
-            or OLLAMA_DEPS)
+    return bool(os.environ.get("GROQ_API_KEY")) or OLLAMA_DEPS
 
 CHAT_DEPS = True  # kept for admin status endpoint compatibility
 
@@ -1126,13 +1115,10 @@ def _detect_location() -> str:
 @app.get("/api/chat/info")
 def chat_info():
     s = load_chat_settings()
-    provider = os.environ.get("LLM_PROVIDER", "auto").lower()
-    if provider == "auto" and os.environ.get("GROQ_API_KEY"):
+    if os.environ.get("GROQ_API_KEY"):
         model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant") + " (Groq)"
-    elif provider == "auto" and os.environ.get("HF_TOKEN"):
-        model = os.environ.get("HF_MODEL", "meta-llama/Llama-3.2-3B-Instruct") + " (HuggingFace)"
     else:
-        model = os.environ.get("CHAT_MODEL") or s.get("chat_model", "llama3")
+        model = os.environ.get("CHAT_MODEL") or s.get("chat_model", "llama3") + " (Ollama)"
     return {
         "device":   _detect_device(),
         "model":    model,
@@ -1141,31 +1127,21 @@ def chat_info():
 
 def _check_chat_deps():
     if not _has_llm():
-        raise HTTPException(503, "No LLM configured. Set GROQ_API_KEY, HF_TOKEN, or install ollama.")
+        raise HTTPException(503, "No LLM configured. Set GROQ_API_KEY or install ollama.")
 
 
 def _llm_chat(messages: list) -> str:
-    """Send chat messages to LLM. Priority: Groq → HuggingFace → Ollama (or forced via LLM_PROVIDER)."""
-    provider = os.environ.get("LLM_PROVIDER", "auto").lower()
-    if provider == "auto":
-        groq_key = os.environ.get("GROQ_API_KEY")
-        if groq_key:
-            if not GROQ_AVAILABLE:
-                raise RuntimeError("groq package not installed")
-            groq_model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
-            client = groq_lib.Groq(api_key=groq_key)
-            resp = client.chat.completions.create(model=groq_model, messages=messages)
-            return resp.choices[0].message.content.strip()
-        hf_token = os.environ.get("HF_TOKEN")
-        if hf_token:
-            if not HF_AVAILABLE:
-                raise RuntimeError("huggingface_hub package not installed")
-            hf_model = os.environ.get("HF_MODEL", "meta-llama/Llama-3.2-3B-Instruct")
-            client = _HFInferenceClient(model=hf_model, token=hf_token)
-            resp = client.chat_completion(messages=messages, max_tokens=1024)
-            return resp.choices[0].message.content.strip()
+    """Send chat messages to LLM. Priority: Groq → Ollama."""
+    groq_key = os.environ.get("GROQ_API_KEY")
+    if groq_key:
+        if not GROQ_AVAILABLE:
+            raise RuntimeError("groq package not installed")
+        groq_model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
+        client = groq_lib.Groq(api_key=groq_key)
+        resp = client.chat.completions.create(model=groq_model, messages=messages)
+        return resp.choices[0].message.content.strip()
     if not OLLAMA_DEPS:
-        raise RuntimeError("No LLM available. Set GROQ_API_KEY, HF_TOKEN, or install ollama.")
+        raise RuntimeError("No LLM available. Set GROQ_API_KEY or install ollama.")
     ollama_host, chat_model, _ = _chat_cfg()
     client = ollama_lib.Client(host=ollama_host)
     response = client.chat(model=chat_model, messages=messages)
