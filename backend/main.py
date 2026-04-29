@@ -494,21 +494,33 @@ _SYNC_SKIP = ("chroma", ".DS_Store", "smtp.json", "output")
 def _hf_pull():
     """Pull all files from the HF dataset repo into DATA_DIR on startup."""
     if not HF_DATASET_REPO or not HF_TOKEN:
+        print("[dataset] HF_DATASET_REPO or HF_TOKEN not set — skipping pull")
         return
     try:
-        from huggingface_hub import snapshot_download
-        snapshot_download(
-            repo_id=HF_DATASET_REPO,
-            repo_type="dataset",
-            token=HF_TOKEN,
-            local_dir=str(DATA_DIR),
-            local_dir_use_symlinks=False,
-            cache_dir="/tmp/hf_cache",
-            ignore_patterns=["*.gitattributes", ".gitattributes", "README.md"],
-        )
-        print(f"[dataset] Pulled data from {HF_DATASET_REPO}")
+        from huggingface_hub import hf_hub_download, list_repo_files
+        skip = {".gitattributes", "README.md"}
+        all_files = list(list_repo_files(HF_DATASET_REPO, repo_type="dataset", token=HF_TOKEN))
+        to_pull = [f for f in all_files if f not in skip and not f.startswith(".")]
+        pulled, failed = 0, 0
+        for rel in to_pull:
+            try:
+                dest = DATA_DIR / rel
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                cached = hf_hub_download(
+                    repo_id=HF_DATASET_REPO,
+                    filename=rel,
+                    repo_type="dataset",
+                    token=HF_TOKEN,
+                    cache_dir="/tmp/hf_cache",
+                )
+                shutil.copy2(cached, dest)
+                pulled += 1
+            except Exception as e:
+                print(f"[dataset] pull error {rel}: {e}")
+                failed += 1
+        print(f"[dataset] Pulled {pulled}/{len(to_pull)} files from {HF_DATASET_REPO} ({failed} errors)")
     except Exception as e:
-        print(f"[dataset] Pull failed, using local data: {e}")
+        print(f"[dataset] Pull failed: {e}")
 
 _sync_mtimes: dict = {}
 
