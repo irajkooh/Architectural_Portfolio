@@ -1137,7 +1137,7 @@ def _llm_chat(messages: list) -> str:
     if groq_key:
         if not GROQ_AVAILABLE:
             raise RuntimeError("groq package not installed")
-        groq_model = os.environ.get("GROQ_MODEL", "gemma2-9b-it")
+        groq_model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
         client = groq_lib.Groq(api_key=groq_key)
         resp = client.chat.completions.create(model=groq_model, messages=messages)
         return resp.choices[0].message.content.strip()
