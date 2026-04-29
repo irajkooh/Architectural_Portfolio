@@ -502,6 +502,8 @@ def _hf_pull():
             repo_type="dataset",
             token=HF_TOKEN,
             local_dir=str(DATA_DIR),
+            local_dir_use_symlinks=False,
+            cache_dir="/tmp/hf_cache",
             ignore_patterns=["*.gitattributes", ".gitattributes", "README.md"],
         )
         print(f"[dataset] Pulled data from {HF_DATASET_REPO}")
