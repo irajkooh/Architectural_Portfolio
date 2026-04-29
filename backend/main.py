@@ -905,6 +905,7 @@ async def upload_project_image(
     dest.parent.mkdir(parents=True, exist_ok=True)
     async with aiofiles.open(dest, "wb") as f:
         await f.write(await file.read())
+    threading.Thread(target=_hf_push_file, args=(dest,), daemon=True).start()
     url = f"/uploads/projects/{project_id}/images/{img_id}{ext}"
     cfg = load_config()
     for p in cfg["projects"]:
@@ -1519,6 +1520,7 @@ async def upload_showcase_image(file: UploadFile = File(...), _: str = Depends(v
     dest = SHOWCASE_IMAGES_DIR / file.filename
     async with aiofiles.open(dest, "wb") as f:
         await f.write(await file.read())
+    threading.Thread(target=_hf_push_file, args=(dest,), daemon=True).start()
     return {"filename": file.filename, "url": f"/uploads/showcase_images/{file.filename}"}
 
 @app.delete("/api/admin/showcase/images/{filename}")
@@ -1677,6 +1679,7 @@ def generate_slideshow(
         try: Path(str(SHOWCASE_IMAGES_DIR / "_video.mp4")).unlink(missing_ok=True)
         except: pass
 
+    threading.Thread(target=_hf_push_file, args=(Path(out),), daemon=True).start()
     return {"slideshow_url": f"/uploads/showcase_images/{slide_name}"}
 
 # ── Showcase ───────────────────────────────────────────────────────────────────
