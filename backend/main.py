@@ -1137,7 +1137,7 @@ def _llm_chat(messages: list) -> str:
     if groq_key:
         if not GROQ_AVAILABLE:
             raise RuntimeError("groq package not installed")
-        groq_model = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
+        groq_model = os.environ.get("GROQ_MODEL", "gemma2-9b-it")
         client = groq_lib.Groq(api_key=groq_key)
         resp = client.chat.completions.create(model=groq_model, messages=messages)
         return resp.choices[0].message.content.strip()
@@ -1335,7 +1335,7 @@ async def chat_endpoint(data: dict):
                 "answer":  "No resume has been uploaded yet — please upload one in the admin panel.",
                 "summary": "",
             }
-    context = resume_text_file.read_text(encoding="utf-8").strip()
+    context = resume_text_file.read_text(encoding="utf-8").strip()[:8000]
     if not context:
         return {"answer": "The resume appears to be empty.", "summary": chat_summary}
 
