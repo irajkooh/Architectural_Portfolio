@@ -1,0 +1,220 @@
+{
+  "theme": {
+    "background": "#121212",
+    "foreground": "#F5F0EB",
+    "accent": "#C9A84C",
+    "secondary": "#6e5e48",
+    "headerFont": "Playfair Display",
+    "bodyFont": "Inter",
+    "backgroundImage": null,
+    "backgroundImageOpacity": 0.35
+  },
+  "hero": {
+    "title": "Tella Irani Shemirani",
+    "subtitle": "Architect",
+    "tagline": "Designing spaces that inspire, endure, and connect.",
+    "backgroundVideo": "/uploads/showcase_images/slideshow_1777057871.mp4",
+    "backgroundImage": null,
+    "showVideo": true,
+    "backgroundImageOpacity": 0.07,
+    "backgroundVideoOpacity": 0.25,
+    "ctaPortfolio": "View Portfolio",
+    "ctaResume": "Download Resume"
+  },
+  "about": {
+    "bio": "I am an architect driven by the belief that design is both a creative act and a responsibility. My work is rooted in transforming ideas into built reality, carrying projects from early vision through the complexities of construction with clarity, intention, and precision. I have worked across a wide range of project types, including commercial, hospitality, educational, public housing, and transportation, contributing to alterations, renovations, additions, and new construction. This diversity has shaped my ability to adapt quickly, think critically, and respond to the unique challenges each project presents. I am deeply engaged in the technical side of architecture, where details matter, and decisions have a lasting impact. I take pride in producing clear, coordinated, and thoughtful documentation and in bridging the gap between design vision and constructability. At the core of my work is a commitment to creating architecture that is purposeful, resilient, and meaningful, spaces that not only function well but also leave a lasting impression on the people who experience them.",
+    "philosophy": "I believe extraordinary design is more than what is seen; it is what is felt, experienced, and remembered. It has the power to tell stories, connect people, and quietly shape how we move through the world. I am drawn to creating spaces that inspire, endure, and resonate, places that respond to their surroundings while enriching the lives within them. My approach is rooted in both precision and imagination. With a strong technical foundation and a careful eye for detail, I navigate each phase of design with intention and clarity. Through tools like Revit and advanced visualization techniques, I transform ideas into spaces that are not only expressive but also functional and buildable. I value the ability to translate complexity into clarity, allowing every stakeholder to engage with the vision and feel a sense of ownership in the process. I see each project as an opportunity to listen, to interpret, and to create with purpose. Guided by both education and experience, I strive to craft work that is thoughtful, resilient, and lasting, and design that continues to speak long after it is built.",
+    "linkedin": "https://linkedin.com/in/tella-irani-shemirani",
+    "photo": "/uploads/profile/photo.png",
+    "education": [
+      {
+        "year": "2020",
+        "degree": "Master of Architecture",
+        "institution": "Carleton University"
+      },
+      {
+        "year": "2018",
+        "degree": "Bachelor of Architectural Studies",
+        "institution": "Carleton University"
+      }
+    ],
+    "skills": [
+      "Architectural Design",
+      "Sustainable Design",
+      "Interior Architecture",
+      "Revit",
+      "Rhino",
+      "Grasshopper",
+      "3D Max",
+      "Autocad",
+      "Adobe Photoshop",
+      "Adobe Indesign",
+      "Building Information Modeling (BIM)",
+      "Bentley MicroStation Connect",
+      "Bentley OpenBuildings Designer",
+      "Parametric Design",
+      "MS Office"
+    ],
+    "honors": [
+      {
+        "year": "2017",
+        "title": "John Adjaeleian Scholarship",
+        "description": "Awarded for the research, manufacturing, and prototyping of a robot representing an intelligent building skin \u2014 contributing to the understanding of building structures at the level of the building envelope.",
+        "url": "https://carleton.ca/cee/2017/award-winners-honoured-ja-lecture/"
+      }
+    ],
+    "publications": [
+      {
+        "year": "2017",
+        "title": "Interactive Facade",
+        "venue": "Master's Thesis, Carleton University",
+        "url": "https://www.researchgate.net/publication/325477172_INTERACTIVE_FACADE"
+      }
+    ]
+  },
+  "projectTypes": [
+    "Commercial",
+    "Hospitality",
+    "Transportation",
+    "Public Housing"
+  ],
+  "projects": [
+    {
+      "id": "c7a5019f-d1ba-4111-b854-3558d8c114c6",
+      "title": "SYSTRA A&E",
+      "category": "Public Housing",
+      "year": "November 2022 - December 2024",
+      "client": "New York City Housing Authority (NYCHA)",
+      "location": "New York City, USA",
+      "description": "This project involved the large-scale roofing replacement of two NYCHA residential developments, each comprising 23 buildings with multiple typologies, including low-rise, mid-rise, and high-rise structures. The scope focused on upgrading aging roofing systems to meet current NYC energy code requirements while improving overall building performance.\nA key challenge was integrating increased insulation thickness and higher R-values into existing conditions, requiring careful coordination to maintain proper drainage, roof scupper performance, and critical elevations at bulkheads and adjacent elements.\n\nAs an Architectural Designer III, I contributed to the design development and construction documentation of complex multi-building roofing systems. Conducted detailed field surveys and translated existing conditions into accurate digital drawings to inform design decisions.\nDeveloped coordinated construction drawings and roofing details in Revit, addressing drainage, insulation transitions, and system integration across multiple building types.\nCollaborated with the project team to resolve technical challenges related to code compliance and constructability, ensuring accurate, buildable solutions aligned with field conditions.",
+      "cover": "/uploads/projects/c7a5019f-d1ba-4111-b854-3558d8c114c6/images/41399b21-0fff-45e8-90db-4b23ecbb9054.png",
+      "video": null,
+      "videoUrl": null,
+      "images": [
+        "/uploads/projects/c7a5019f-d1ba-4111-b854-3558d8c114c6/images/41399b21-0fff-45e8-90db-4b23ecbb9054.png"
+      ],
+      "name": "NYCHA Roofing Replacement \u2013 Van Dyke Houses & Pelham Parkway"
+    },
+    {
+      "id": "4f812505-c286-4442-a3c4-46d0830b0fbe",
+      "title": "SYSTRA A&E",
+      "description": "Project Overview\r\nThis project addressed critical building envelope deficiencies at the Throgs Neck Bridge Service Building, where water infiltration impacted foundation walls, fa\u00e7ades, parapets, and roof transitions. The design focused on restoring envelope integrity through targeted repairs and enhanced waterproofing systems.\r\nThe scope included fa\u00e7ade treatments, flashing system upgrades, and foundation waterproofing strategies to improve durability, performance, and long-term resilience.\r\n\r\nAs an Architectural Designer III, I developed detailed construction drawings and envelope details in Revit to support the rehabilitation effort.\r\nProduced coordinated details for fa\u00e7ade systems, parapets, curbs, and foundations, including siloxane masonry coatings, sealed penetrations, and cold liquid-applied flashing assemblies.\r\nDeveloped waterproofing details, including polyurethane crack injection at foundation walls, ensuring coordination with existing conditions and improving long-term building performance.",
+      "category": "Transportation",
+      "year": "November 2022 - January 2024",
+      "client": "MTA Construction & Development Company",
+      "location": "New York City, USA",
+      "images": [
+        "/uploads/projects/4f812505-c286-4442-a3c4-46d0830b0fbe/images/37ad4e08-278b-41f6-bbfe-c14a6770aeb9.png",
+        "/uploads/projects/4f812505-c286-4442-a3c4-46d0830b0fbe/images/3c7a6204-fd5d-44c2-a4f6-1b517d833bba.png",
+        "/uploads/projects/4f812505-c286-4442-a3c4-46d0830b0fbe/images/62b6d43e-beb6-46bc-988b-2394427bb91b.png"
+      ],
+      "cover": "/uploads/projects/4f812505-c286-4442-a3c4-46d0830b0fbe/images/37ad4e08-278b-41f6-bbfe-c14a6770aeb9.png",
+      "video": null,
+      "videoUrl": null,
+      "name": "MTA Construction Development Throgs Neck Bridge Service Building Restoration Bronx, NYC"
+    },
+    {
+      "id": "9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3",
+      "title": "Rockwell Group",
+      "description": "Set within the iconic Fontainebleau Las Vegas, this project brings together a collection of immersive, high-energy hospitality venues, including a nightclub, day club, theater, and destination dining experiences. Each space is conceived as a distinct environment, blending luxury, performance, and experiential design.\r\nFrom a Baroque-inspired nightclub with a dynamic, transformable ceiling to LIV Beach\u2019s open-air, Riviera-inspired atmosphere and exclusive venues overlooking the Las Vegas Strip, the project delivers a layered and highly curated guest experience.\r\n\r\nAs an Architectural Designer with an interior design background, I played a key role in the design and documentation of these highly experiential environments. Developed detailed construction drawings, 3D models, and custom millwork packages in Revit, translating bold design concepts into precise, buildable solutions.\r\nDeveloped detailed construction drawings, 3D models, and custom millwork packages in Revit, translating complex design concepts into coordinated, buildable solutions.\r\nCollaborated with design leadership and multidisciplinary teams to advance space planning, refine design intent, and resolve technical challenges. Produced schematic models and visual presentations in Rhino to support design development.",
+      "category": "Hospitality",
+      "year": "September 2021 \u2013 July 2022",
+      "client": "Fontainebleau Development",
+      "location": "Las Vegas, USA",
+      "images": [
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/71f18887-aa0c-4bda-a6c5-b240cf0f34ea.jpg",
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/b4c34722-276e-4346-915f-fb81f53078fb.jpg",
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/164bf0e1-eedd-4937-abcb-659071facf96.jpg",
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/81565e7e-84bf-4ea1-a133-d0fa2bab0df1.jpg",
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/7061434c-70bf-4d9c-acd5-8e2e6447c50e.jpg",
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/a511c7c9-4e9d-4113-86e4-9bed5cd4f0a4.jpg",
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/92b00430-8866-4f64-915d-33ba1465c3d2.jpg",
+        "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/3ac6585b-2cb5-4ea1-9c8e-f31dd9d54c07.webp"
+      ],
+      "cover": "/uploads/projects/9d0a72d3-6ae4-4b95-8eb5-d403cf3f71b3/images/71f18887-aa0c-4bda-a6c5-b240cf0f34ea.jpg",
+      "video": null,
+      "videoUrl": null,
+      "name": "Fontainebleau Las Vegas Hotel"
+    },
+    {
+      "id": "0a1109da-5947-4b4c-9ddd-c0bbf987b2dd",
+      "title": "Rockwell Group",
+      "description": "This project reimagines Jones Beach Theater, a historic waterfront concert venue along the Atlantic Ocean, through a comprehensive renovation and expansion focused on resilience, performance, and visitor experience.\r\nThe design introduces new entry sequences with a canopy structure, expanded plazas, upgraded seating, and enhanced concourses, elevating the visitor experience while preserving the character of the iconic venue. Coastal protection strategies, including seawalls and sustainable systems, were integrated to address rising sea levels and long-term environmental impact.\r\n\r\nAs an Architectural Designer, I contributed to the design and construction documentation of large-scale entertainment and public spaces.\r\nDeveloped coordinated drawing sets, 3D models, and architectural details in Revit, translating design concepts into precise, buildable solutions.\r\nCollaborated with multidisciplinary teams to advance space planning, resolve technical challenges, and ensure alignment between design intent, constructability, and long-term performance.",
+      "category": "Hospitality",
+      "year": "September 2021 - July 2024",
+      "client": "",
+      "location": "Long Island, New York, USA",
+      "images": [
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/edf0023e-2cca-4d5f-b3a0-9c2f7bd11a98.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/5d52cefa-20a3-4555-95e9-edb57a8c8acb.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/07260695-d4ae-4b38-83c0-ab091a84a460.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/15d151ea-2e10-4273-bf47-52b5ddf18f87.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/11438992-9d44-4edb-ac2c-5eb71947d921.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/be344780-3fcf-47ba-90a5-83f7f3452abb.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/005c95a0-1f09-4f9d-8a60-78fba769533c.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/fc876689-2bd0-49c7-b3c1-17aa54ebf656.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/877c553e-38ae-47a7-a261-3ad61988191b.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/f1efd4be-176e-4122-947f-f6e3a9e6a45d.jpg",
+        "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/a76bf51d-3401-4162-a881-7a92dea09db9.jpg"
+      ],
+      "cover": "/uploads/projects/0a1109da-5947-4b4c-9ddd-c0bbf987b2dd/images/edf0023e-2cca-4d5f-b3a0-9c2f7bd11a98.jpg",
+      "video": null,
+      "videoUrl": null,
+      "name": "Jones Beach Theater complex Renovation"
+    },
+    {
+      "id": "7ca96932-1821-46ed-8f1e-666103d8a2f7",
+      "title": "OSFI",
+      "description": "This project involved the major renovation and interior fit-out of multiple office locations for the Office of the Superintendent of Financial Institutions (OSFI) across Canada, including eleven offices in Ottawa, four in Toronto, one in Montreal, and two in Vancouver.\r\nThe design focused on modernizing workplace environments through strategic space planning, improved functionality, and cohesive interior standards. Emphasis was placed on creating efficient, flexible, and high-performing workplaces that support evolving organizational needs through forward-thinking design strategies.\r\n\r\nAs the Project Designer, I led the design and delivery of multi-location office environments from early planning through construction documentation.\r\nConducted pre- and post-occupancy studies, led needs analysis, and engaged with clients and government stakeholders to define program requirements, space utilization, and workplace strategies. Developed functional programs, adjacency studies, and multiple space planning options, integrating approaches such as Activity-Based Workplace Design, Biophilic Design, and GC workplace standards.\r\nProduced BIM models, 3D visualizations, and presentation packages using Revit, Enscape, Rhino, and Adobe Creative Suite. Developed coordinated construction documents and interior details, while conducting product research, material selection, and code analysis to ensure fully integrated and compliant design solutions.\r\nCollaborated closely with multidisciplinary teams and clients through presentations, workshops, and ongoing coordination\u2014translating complex requirements into clear, functional, and buildable workplace environments.",
+      "category": "Commercial",
+      "year": "March 2020 \u2013 August 2021, July 2018 \u2013 December 2018",
+      "client": "Office of the Superintendent of Financial Institutions, OSFI BSIF",
+      "location": "Ottawa, Toronto, Montreal & Vancouver, Canada",
+      "images": [
+        "/uploads/projects/7ca96932-1821-46ed-8f1e-666103d8a2f7/images/db9e8243-1780-44e5-a5d2-40c6892897b5.jpg"
+      ],
+      "cover": "/uploads/projects/7ca96932-1821-46ed-8f1e-666103d8a2f7/images/db9e8243-1780-44e5-a5d2-40c6892897b5.jpg",
+      "video": null,
+      "videoUrl": null,
+      "name": "Office Renovation & Interior Fit-Out"
+    }
+  ],
+  "resume": {
+    "file": "/uploads/resume/resume.pdf",
+    "visible": true,
+    "highlights": [
+      "Architectural Design",
+      "Sustainable Building",
+      "Client Consultation",
+      "Interior Architecture"
+    ]
+  },
+  "contact": {
+    "email": "tellairshemirani@gmail.com",
+    "linkedin": "https://linkedin.com/in/tella-irani-shemirani",
+    "message": "Let's create something extraordinary together. Reach out to discuss your project or collaboration."
+  },
+  "showcase": {
+    "title": "Projects Showcase",
+    "subtitle": "",
+    "videoOpacity": 1,
+    "videos": [
+      {
+        "id": "d81686ba-db5a-4ccf-8f62-8f7429d3fbca",
+        "url": "/uploads/showcase_images/slideshow_1777495735.mp4",
+        "title": "Slideshow_8",
+        "description": ""
+      },
+      {
+        "id": "819509e7-50fd-4a3b-89e7-279878f3398a",
+        "url": "/uploads/showcase_images/slideshow_1777057871.mp4",
+        "title": "Slideshow_3",
+        "description": ""
+      }
+    ]
+  },
+  "portfolio": {
+    "file": "/uploads/portfolio/portfolio.pdf",
+    "visible": true
+  }
+}

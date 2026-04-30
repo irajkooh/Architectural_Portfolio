@@ -21,5 +21,6 @@ EXPOSE 7860
 ENV ADMIN_PASSWORD=TAA1346
 ENV DATA_DIR=/app/backend/uploads
 ENV HF_HOME=/tmp/hf_home
+ENV HF_DATASET_REPO=irajkoohi/portfolio-data
 
 CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "7860"]

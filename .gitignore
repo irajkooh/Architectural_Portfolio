@@ -5,7 +5,6 @@ backend/venv/
 backend/__pycache__/
 backend/uploads/chroma/
 backend/uploads/smtp.json
-backend/uploads/config.json
 backend/uploads/showcase_images/_clip*.mp4
 backend/uploads/showcase_images/_video.mp4
 backend/uploads/backgrounds/*.m4v
