@@ -497,27 +497,37 @@ def _hf_pull():
         print("[dataset] HF_DATASET_REPO or HF_TOKEN not set — skipping pull")
         return
     try:
-        from huggingface_hub import hf_hub_download, list_repo_files
+        import requests as _req
+        from huggingface_hub import list_repo_files
         skip = {".gitattributes", "README.md"}
         all_files = list(list_repo_files(HF_DATASET_REPO, repo_type="dataset", token=HF_TOKEN))
         to_pull = [f for f in all_files if f not in skip and not f.startswith(".")]
         pulled, failed = 0, 0
+        headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+        print(f"[dataset] Pulling {len(to_pull)} files to {DATA_DIR} ...")
         for rel in to_pull:
             try:
                 dest = DATA_DIR / rel
                 dest.parent.mkdir(parents=True, exist_ok=True)
-                cached = hf_hub_download(
-                    repo_id=HF_DATASET_REPO,
-                    filename=rel,
-                    repo_type="dataset",
-                    token=HF_TOKEN,
-                    cache_dir="/tmp/hf_cache",
-                )
-                shutil.copy2(cached, dest)
+                url = f"https://huggingface.co/datasets/{HF_DATASET_REPO}/resolve/main/{rel}"
+                with _req.get(url, headers=headers, timeout=120, stream=True) as r:
+                    r.raise_for_status()
+                    with open(dest, "wb") as fh:
+                        for chunk in r.iter_content(chunk_size=8 * 1024 * 1024):
+                            fh.write(chunk)
+                size = dest.stat().st_size
+                if size == 0:
+                    dest.unlink()
+                    raise RuntimeError("server returned empty file")
                 pulled += 1
             except Exception as e:
                 print(f"[dataset] pull error {rel}: {e}")
                 failed += 1
+        # Spot-check: log a few pulled image paths so we can verify location
+        sample_imgs = [f for f in to_pull if f.startswith("projects/") and pulled > 0][:2]
+        for s in sample_imgs:
+            p = DATA_DIR / s
+            print(f"[dataset] check {p} exists={p.exists()}")
         print(f"[dataset] Pulled {pulled}/{len(to_pull)} files from {HF_DATASET_REPO} ({failed} errors)")
     except Exception as e:
         print(f"[dataset] Pull failed: {e}")
