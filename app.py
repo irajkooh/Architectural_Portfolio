@@ -7,7 +7,7 @@ import time
 
 PORTS    = [8000, 5173]
 ROOT     = os.path.dirname(os.path.abspath(__file__))
-REQ_FILE = os.path.join(ROOT, "requirements.txt")
+REQ_FILE = os.path.join(ROOT, "backend", "requirements.txt")
 
 
 def clear_screen():

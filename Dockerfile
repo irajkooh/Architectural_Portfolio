@@ -10,7 +10,6 @@ COPY backend/requirements.txt ./backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
 COPY backend/ ./backend/
-COPY media/ ./media/
 
 RUN chown -R 1000:1000 /app && \
     chmod -R 755 /app/backend/uploads

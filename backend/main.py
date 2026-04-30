@@ -58,7 +58,6 @@ SMTP_FILE         = DATA_DIR / "smtp.json"
 CHAT_SETTINGS_FILE = DATA_DIR / "chat_settings.json"
 CHROMA_DIR        = DATA_DIR / "chroma"
 OUTPUT_DIR        = DATA_DIR / "output"
-MEDIA_DIR         = BASE_DIR.parent / "media"
 
 def load_chat_settings() -> dict:
     if CHAT_SETTINGS_FILE.exists():
@@ -2230,10 +2229,6 @@ def download_portfolio(fmt: str = Query("pdf", regex="^(pdf|docx)$")):
         filename = "electronic_portfolio.pdf"
     return FileResponse(str(out), media_type=media, filename=filename)
 
-
-# ── Serve media/ folder (pre-loaded portfolio PDF, etc.) ──────────────────────
-if MEDIA_DIR.exists():
-    app.mount("/media", StaticFiles(directory=str(MEDIA_DIR)), name="media")
 
 # ── Serve uploaded files ───────────────────────────────────────────────────────
 app.mount("/uploads", StaticFiles(directory=str(DATA_DIR)), name="uploads")
