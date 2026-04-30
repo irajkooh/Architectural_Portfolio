@@ -489,7 +489,7 @@ HF_DATASET_REPO = os.environ.get("HF_DATASET_REPO", "")
 HF_TOKEN        = os.environ.get("HF_TOKEN", "")
 
 # Files/dirs to never push to the dataset (large or ephemeral)
-_SYNC_SKIP = ("chroma", ".DS_Store", "smtp.json", "output")
+_SYNC_SKIP = ("chroma", ".DS_Store", "smtp.json", "output", "config.json")
 
 def _hf_pull():
     """Pull all files from the HF dataset repo into DATA_DIR on startup."""
