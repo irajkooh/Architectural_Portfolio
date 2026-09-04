@@ -2,8 +2,8 @@ name: Keep HF Space Alive
 
 on:
   schedule:
-    - cron: "0 8 * * *"   # Every day at 08:00 UTC
-  workflow_dispatch:       # Also allows manual trigger from GitHub UI
+    - cron: "0 */12 * * *"  # Runs every 12 hours
+  workflow_dispatch:        # Allows manual triggers
 
 jobs:
   ping:
@@ -11,10 +11,10 @@ jobs:
     steps:
       - name: Ping HF Space
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 120 \
+          STATUS=$(curl -s -L -o /dev/null -w "%{http_code}" --max-time 120 \
             "https://irajkoohi-architectural-portfolio.hf.space")
           echo "Response status: $STATUS"
-          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 500 ]; then
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
             echo "Space is alive."
           else
             echo "Warning: unexpected status $STATUS"
